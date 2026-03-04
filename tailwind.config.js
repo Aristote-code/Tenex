@@ -8,10 +8,12 @@ export default {
     extend: {
       colors: {
         primary: "#0D0D12",
-        accent: "#C9A84C",
+        accent: "#E8501A",
+        glow: "#FF6B35",
         background: "#FAF8F5",
         slate: "#2A2A35",
         dark: "#0a0a0d",
+        surface: "#1A1A1F",
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

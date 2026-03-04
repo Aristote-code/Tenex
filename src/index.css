@@ -2,10 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --accent: #E8501A;
+  --glow: #FF6B35;
+  --glow-soft: rgba(232, 80, 26, 0.15);
+  --glow-mid: rgba(232, 80, 26, 0.35);
+}
+
 @layer base {
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #0D0D12;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: #0D0D12;
   }
 }
 
@@ -13,6 +26,7 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -20,5 +34,72 @@
 
   .perspective-1000 {
     perspective: 1000px;
+  }
+
+  /* Orange radial glow — used in hero & card highlights */
+  .glow-orange {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%,
+        rgba(232, 80, 26, 0.28) 0%,
+        rgba(255, 107, 53, 0.08) 55%,
+        transparent 100%);
+  }
+
+  .glow-orange-sm {
+    background: radial-gradient(ellipse 70% 50% at 50% 50%,
+        rgba(232, 80, 26, 0.18) 0%,
+        transparent 80%);
+  }
+
+  /* Animated shimmer line like the Figma design */
+  .shimmer-line {
+    position: absolute;
+    width: 1px;
+    background: linear-gradient(to bottom,
+        transparent,
+        rgba(232, 80, 26, 0.6),
+        transparent);
+    animation: shimmer-travel 3s ease-in-out infinite;
+  }
+
+  .orange-border-glow {
+    border-color: rgba(232, 80, 26, 0.3);
+    box-shadow: 0 0 24px rgba(232, 80, 26, 0.1), inset 0 0 24px rgba(232, 80, 26, 0.04);
+  }
+
+  .orange-border-glow:hover {
+    border-color: rgba(232, 80, 26, 0.55);
+    box-shadow: 0 0 40px rgba(232, 80, 26, 0.18), inset 0 0 32px rgba(232, 80, 26, 0.07);
+  }
+}
+
+@keyframes shimmer-travel {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(300%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
   }
 }
