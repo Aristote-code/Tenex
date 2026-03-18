@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Home Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "heroSubtitle": { "type": "string" },
+    "heroHeadline": { "type": "text" },
+    "heroDescription": { "type": "text" },
+    "heroButtonText": { "type": "string" },
+    "features": { "type": "component", "repeatable": true, "component": "shared.feature" },
+    "manifestoSubtitle": { "type": "string" },
+    "manifestoText": { "type": "text" },
+    "protocolSubtitle": { "type": "string" },
+    "protocolHeadline": { "type": "string" },
+    "coreProcess": { "type": "component", "repeatable": true, "component": "shared.card" },
+    "foundersSubtitle": { "type": "string" },
+    "foundersHeadline": { "type": "string" },
+    "foundersDescription": { "type": "text" },
+    "founderCount": { "type": "integer" }
+  }
+}

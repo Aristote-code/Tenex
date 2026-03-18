@@ -45,7 +45,7 @@ const Projects = () => {
             <div className="max-w-6xl mx-auto">
                 <div className="mb-20">
                     <TypewriterText text="/ INITIATIVES_INDEX" />
-                    <h1 className="font-drama text-6xl md:text-8xl text-background mt-6">
+                    <h1 className="font-display text-6xl md:text-8xl text-background mt-6">
                         <span className="italic text-accent">Selected</span> Work
                     </h1>
                     <p className="font-sans text-xl text-background/60 max-w-2xl mt-8 leading-relaxed">
@@ -63,8 +63,8 @@ const Projects = () => {
 
                             <div className="flex justify-between items-start gap-4">
                                 <div>
-                                    <h3 className="font-drama text-4xl text-background mb-4"><ScrambleText text={p.title} /></h3>
-                                    <div className="flex items-center gap-3 font-data text-accent text-xs uppercase tracking-widest mb-4">
+                                    <h3 className="font-display text-4xl text-background mb-4"><ScrambleText text={p.title} /></h3>
+                                    <div className="flex items-center gap-3 font-mono text-accent text-xs uppercase tracking-widest mb-4">
                                         <span>{p.type}</span>
                                         <span className="w-1 h-1 bg-accent/40 rounded-full"></span>
                                         <span>{p.timeline}</span>

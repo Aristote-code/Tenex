@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_shared_features",
+  "info": {
+    "displayName": "Feature",
+    "icon": "star"
+  },
+  "attributes": {
+    "num": { "type": "string" },
+    "title": { "type": "string" },
+    "desc": { "type": "text" }
+  }
+}

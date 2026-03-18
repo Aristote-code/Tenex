@@ -7,7 +7,7 @@ import { ScrambleText, TypewriterText } from '../components/ui';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = () => {
+const Hero = ({ data }) => {
     const containerRef = useRef(null);
 
     useEffect(() => {
@@ -24,6 +24,8 @@ const Hero = () => {
         return () => ctx.revert();
     }, []);
 
+    const headlineLines = (data.heroHeadline || '').split('\n');
+
     return (
         <section ref={containerRef} className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-24 pb-12 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-surface -z-10"></div>
@@ -33,23 +35,23 @@ const Hero = () => {
 
             <div className="max-w-6xl mx-auto w-full flex flex-col items-start gap-8 z-10">
                 <div className="hero-elem">
-                    <TypewriterText text="[ SYS.INIT. / TENEX_V1.0 ]" />
+                    <TypewriterText text={data.heroSubtitle} />
                 </div>
 
                 <h1 className="hero-elem font-display text-6xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] text-primary max-w-5xl">
-                    We don't just build.<br />
-                    <span className="italic text-accent">We execute.</span>
+                    {headlineLines[0]}<br />
+                    <span className="italic text-accent">{headlineLines[1]}</span>
                 </h1>
 
                 <p className="hero-elem font-sans text-lg md:text-xl text-primary/70 max-w-2xl leading-relaxed mt-4 font-medium">
-                    <ScrambleText text="High-velocity product studio. Rapid prototyping. Absolute execution." />
+                    <ScrambleText text={data.heroDescription} />
                 </p>
 
                 <div className="hero-elem mt-8">
-                    <button className="magnetic group flex items-center gap-4 bg-accent text-white px-8 py-4 rounded-full font-sans font-bold text-lg hover:bg-glow transition-colors duration-500 shadow-lg shadow-accent/20">
-                        Book a Build Sprint
+                    <Link to="/contact" className="magnetic group flex w-fit items-center gap-4 bg-accent text-white px-8 py-4 rounded-full font-sans font-bold text-lg hover:bg-glow transition-colors duration-500 shadow-lg shadow-accent/20">
+                        {data.heroButtonText || "Book a Build Sprint"}
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </Link>
                 </div>
             </div>
 
@@ -62,15 +64,9 @@ const Hero = () => {
     );
 };
 
-const Features = () => {
-    const features = [
-        { num: "01", title: "Speed", desc: "Fast delivery, rapid iteration, execution-first." },
-        { num: "02", title: "Quality", desc: "High standards, systems over shortcuts." },
-        { num: "03", title: "10x Mindset", desc: "Exponential thinking, building for scale." }
-    ];
-
+const Features = ({ features }) => {
     return (
-        <section className="py-32 px-6 md:px-12 bg-white border-y border-primary/5">
+        <section className="py-32 px-6 md:px-12 bg-card border-y border-primary/5">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     {features.map((f, i) => (
@@ -87,7 +83,7 @@ const Features = () => {
     );
 };
 
-const Philosophy = () => {
+const Philosophy = ({ data }) => {
     const textRef = useRef(null);
 
     useEffect(() => {
@@ -116,14 +112,12 @@ const Philosophy = () => {
         }
     }, []);
 
-    const text = "Decisive execution. Exponential thinking. Category-defining products. We don't iterate incrementally. We leapfrog.";
-
     return (
         <section id="philosophy" className="py-48 px-6 md:px-12 bg-surface">
             <div className="max-w-5xl mx-auto">
-                <p className="font-mono text-accent font-bold text-sm mb-12 uppercase tracking-widest block">/ Manifesto</p>
+                <p className="font-mono text-accent font-bold text-sm mb-12 uppercase tracking-widest block">{data.manifestoSubtitle}</p>
                 <h2 ref={textRef} className="font-display font-medium text-4xl md:text-6xl lg:text-7xl text-primary leading-tight">
-                    {text.split(' ').map((word, i) => (
+                    {(data.manifestoText || '').split(' ').map((word, i) => (
                         <span key={i} className="word inline-block mr-[0.25em]">{word}</span>
                     ))}
                 </h2>
@@ -132,26 +126,22 @@ const Philosophy = () => {
     );
 };
 
-const Protocol = () => {
-    const cards = [
-        { title: "Rapid Prototyping", text: "Validate immediately through high-fidelity prototypes.", img: "/images/protocol_1_1772633314036.png" },
-        { title: "Internal Systems", text: "Infrastructure and tools designed to compound velocity.", img: "/images/protocol_2_1772633339745.png" },
-        { title: "External Projects", text: "Client work delivered with uncompromising standards.", img: "/images/protocol_3_1772633358698.png" }
-    ];
+const Protocol = ({ data }) => {
+    const cards = data.coreProcess || [];
 
     return (
         <section id="protocol" className="relative py-32 px-6 md:px-12 bg-background border-y border-primary/5">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-24">
-                    <TypewriterText text="PROTOCOL.ENGAGE()" />
-                    <h2 className="font-display font-bold text-5xl md:text-7xl text-primary mt-6">The Tenex Approach</h2>
+                    <TypewriterText text={data.protocolSubtitle} />
+                    <h2 className="font-display font-bold text-5xl md:text-7xl text-primary mt-6">{data.protocolHeadline}</h2>
                 </div>
 
                 <div className="relative flex flex-col gap-24">
                     {cards.map((c, i) => (
                         <div
                             key={i}
-                            className="sticky top-32 w-full min-h-[50vh] bg-white rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 border border-primary/10 shadow-xl transition-all duration-500 red-border-glow overflow-hidden"
+                            className="sticky top-32 w-full min-h-[50vh] bg-card rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 border border-primary/10 shadow-xl transition-all duration-500 red-border-glow overflow-hidden"
                             style={{ zIndex: i }}
                         >
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-24 glow-red-sm rounded-full pointer-events-none opacity-40"></div>
@@ -166,7 +156,7 @@ const Protocol = () => {
 
                             <div className="w-full md:w-1/2 h-[300px] md:h-[450px] relative rounded-2xl overflow-hidden border border-primary/10 z-10 shadow-inner">
                                 <div className="absolute inset-0 bg-accent/5 mix-blend-multiply z-20 pointer-events-none"></div>
-                                <img src={c.img} alt={c.title} className="w-full h-full object-cover grayscale-[20%] contrast-110 hover:grayscale-0 hover:scale-105 transition-all duration-700" />
+                                <img src={c.image} alt={c.title} className="w-full h-full object-cover grayscale-[20%] contrast-110 hover:grayscale-0 hover:scale-105 transition-all duration-700" />
                             </div>
 
                         </div>
@@ -228,19 +218,33 @@ const ProjectsPreview = () => {
     );
 };
 
-const Founders = () => {
+const Founders = ({ data }) => {
+    const team = [
+        { name: "Prince Ndanyuzwe", role: "CEO" },
+        { name: "Dimitri Kwihangana", role: "CTO" },
+        { name: "Kevin Nyiringango", role: "COO" },
+        { name: "Elisa Niyogisubizo", role: "CFO & Marketing" },
+        { name: "Aristote Gahima", role: "Product & Design" },
+        { name: "Aristide Isingizwe", role: "Software Architect" },
+        { name: "Johnson Tuyishime", role: "Eng Lead" },
+        { name: "Ken Kalisa Ganza", role: "Cloud Eng" },
+        { name: "Davy Mbuto", role: "Business Dev" }
+    ];
+
     return (
-        <section className="py-32 px-6 md:px-12 bg-white border-t border-primary/10">
-            <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-                <div>
-                    <TypewriterText text="TEAM // 9_NODES" />
-                    <h2 className="font-display font-bold text-5xl md:text-7xl text-primary mt-6">Co-Founders</h2>
-                    <p className="font-sans text-primary/70 mt-4 text-xl font-medium">Building together since 2023.</p>
+        <section className="py-32 px-6 md:px-12 bg-card border-t border-primary/10">
+            <div className="max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-12">
+                <div className="lg:w-1/3">
+                    <TypewriterText text={data.foundersSubtitle || "/ THE_CORE_TEAM"} />
+                    <h2 className="font-display font-bold text-5xl md:text-7xl text-primary mt-6">{data.foundersHeadline || "9 Founders"}</h2>
+                    <p className="font-sans text-primary/70 mt-4 text-xl font-medium">{data.foundersDescription || "A collective of builders focused on speed, quality, and 10x execution."}</p>
                 </div>
-                <div className="grid grid-cols-3 gap-0 border border-primary/10 bg-background">
-                    {[...Array(9)].map((_, i) => (
-                        <div key={i} className="w-20 h-20 md:w-32 md:h-32 border border-primary/5 flex items-center justify-center transition-all duration-500 bg-white hover:bg-surface hover:border-accent/40 group cursor-default">
-                            <span className="font-mono text-xs text-primary/30 font-bold group-hover:text-accent">F{i + 1}</span>
+                <div className="lg:w-2/3 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {team.map((member, i) => (
+                        <div key={i} className="p-6 border border-primary/10 rounded-xl bg-background hover:border-accent/40 transition-colors duration-500 group cursor-default relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-16 h-16 bg-accent/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:scale-150 transition-transform duration-700 pointer-events-none"></div>
+                            <h3 className="font-display font-bold text-xl text-primary mb-1">{member.name}</h3>
+                            <p className="font-mono text-xs uppercase tracking-widest text-accent font-bold">{member.role}</p>
                         </div>
                     ))}
                 </div>
@@ -250,14 +254,29 @@ const Founders = () => {
 };
 
 const Home = () => {
+    const [pageData, setPageData] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:1337/api/home-page?populate=*')
+            .then(res => res.json())
+            .then(json => {
+                if (json && json.data) {
+                    setPageData(json.data);
+                }
+            })
+            .catch(err => console.error('Failed to fetch home page:', err));
+    }, []);
+
+    if (!pageData) return null;
+
     return (
         <>
-            <Hero />
-            <Features />
-            <Philosophy />
-            <Protocol />
+            <Hero data={pageData} />
+            <Features features={pageData.features || []} />
+            <Philosophy data={pageData} />
+            <Protocol data={pageData} />
             <ProjectsPreview />
-            <Founders />
+            <Founders data={pageData} />
         </>
     );
 };

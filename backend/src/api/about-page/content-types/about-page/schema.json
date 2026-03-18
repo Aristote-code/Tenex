@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_pages",
+  "info": {
+    "singularName": "about-page",
+    "pluralName": "about-pages",
+    "displayName": "About Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "heroSubtitle": { "type": "string" },
+    "heroHeadline": { "type": "text" },
+    "heroDescription": { "type": "text" },
+    "missionSubtitle": { "type": "string" },
+    "missionTextParagraph1": { "type": "text" },
+    "missionTextParagraph2": { "type": "text" },
+    "engineeringFeatures": { "type": "string" },
+    "designFeatures": { "type": "string" },
+    "atmosphereImage": { "type": "string" }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "singularName": "global",
+    "pluralName": "globals",
+    "displayName": "Global"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "brandName": { "type": "string" },
+    "ctaText": { "type": "string" },
+    "footerHeadline": { "type": "text" },
+    "footerCtaText": { "type": "string" },
+    "footerLocation": { "type": "string" },
+    "footerCopyright": { "type": "string" },
+    "navLinks": { "type": "component", "repeatable": true, "component": "shared.link" },
+    "socialLinks": { "type": "component", "repeatable": true, "component": "shared.link" }
+  }
+}

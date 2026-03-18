@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_shared_cards",
+  "info": {
+    "displayName": "Card",
+    "icon": "file"
+  },
+  "attributes": {
+    "title": { "type": "string" },
+    "text": { "type": "text" },
+    "image": { "type": "string" }
+  }
+}

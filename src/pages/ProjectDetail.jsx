@@ -25,7 +25,7 @@ const ProjectDetail = () => {
     }, [slug]);
 
     if (loading) {
-        return <div className="pt-32 pb-32 min-h-screen flex items-center justify-center font-data text-accent tracking-widest text-sm uppercase">Loading System Core...</div>;
+        return <div className="pt-32 pb-32 min-h-screen flex items-center justify-center font-mono text-accent tracking-widest text-sm uppercase">Loading System Core...</div>;
     }
 
     if (!project) {
@@ -36,14 +36,14 @@ const ProjectDetail = () => {
         <div className="pt-32 pb-32 min-h-screen">
             {/* Hero Image Header */}
             <div className="px-6 md:px-12 mb-12">
-                <Link to="/work" className="magnetic inline-flex items-center gap-2 font-data text-xs uppercase tracking-widest text-background/50 hover:text-accent transition-colors mb-12">
+                <Link to="/work" className="magnetic inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-background/50 hover:text-accent transition-colors mb-12">
                     <ArrowLeft className="w-4 h-4" /> Back to Archive
                 </Link>
 
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-12">
                         <TypewriterText text={`/ PROJECT: ${project.slug.toUpperCase()}`} />
-                        <h1 className="font-drama text-6xl md:text-9xl text-background mt-4 mb-8">
+                        <h1 className="font-display text-6xl md:text-9xl text-background mt-4 mb-8">
                             {project.title}
                         </h1>
                         <p className="font-sans text-2xl text-background/80 max-w-3xl leading-relaxed">
@@ -64,7 +64,7 @@ const ProjectDetail = () => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
 
                     {/* Sidebar Info */}
-                    <div className="md:col-span-4 flex flex-col gap-12 font-data text-sm tracking-widest uppercase">
+                    <div className="md:col-span-4 flex flex-col gap-12 font-mono text-sm tracking-widest uppercase">
                         <div className="flex flex-col gap-3">
                             <span className="text-accent">Type</span>
                             <span className="text-background">{project.type}</span>
@@ -93,7 +93,7 @@ const ProjectDetail = () => {
                     <div className="md:col-span-8 flex flex-col gap-16">
 
                         <div>
-                            <h2 className="font-drama text-4xl text-background mb-6"><ScrambleText text="The Challenge" /></h2>
+                            <h2 className="font-display text-4xl text-background mb-6"><ScrambleText text="The Challenge" /></h2>
                             <p className="font-sans text-xl text-background/70 leading-relaxed">
                                 {project.challenge}
                             </p>
@@ -102,7 +102,7 @@ const ProjectDetail = () => {
                         <div className="w-full h-[1px] bg-accent/20"></div>
 
                         <div>
-                            <h2 className="font-drama text-4xl text-background mb-6"><ScrambleText text="The Solution" /></h2>
+                            <h2 className="font-display text-4xl text-background mb-6"><ScrambleText text="The Solution" /></h2>
                             <p className="font-sans text-xl text-background/70 leading-relaxed">
                                 {project.solution}
                             </p>

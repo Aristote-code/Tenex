@@ -2,23 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Theme tokens (auto-switch via OS preference) ─── */
 :root {
+  /* Semantic palette — light mode */
+  --color-primary: 28 28 30;         /* #1C1C1E — text */
+  --color-background: 247 247 248;   /* #F7F7F8 — page bg */
+  --color-surface: 229 231 235;      /* #E5E7EB — alt sections */
+  --color-card: 255 255 255;         /* white   — elevated cards */
+
+  /* Brand — constant across modes */
   --accent: #FF2E2E;
   --glow: #8B0000;
   --glow-soft: rgba(255, 46, 46, 0.15);
   --glow-mid: rgba(255, 46, 46, 0.35);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: 247 247 248;      /* #F7F7F8 — text (flipped) */
+    --color-background: 13 13 18;      /* #0D0D12 — page bg */
+    --color-surface: 26 26 34;         /* #1A1A22 — alt sections */
+    --color-card: 21 21 29;            /* #15151D — elevated cards */
+  }
+}
+
 @layer base {
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #F7F7F8;
+    background-color: rgb(var(--color-background));
+    color: rgb(var(--color-primary));
   }
 
   ::selection {
     background-color: var(--accent);
-    color: #F7F7F8;
+    color: rgb(var(--color-background));
   }
 }
 

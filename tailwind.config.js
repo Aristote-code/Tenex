@@ -7,13 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#1C1C1E",
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        background: "rgb(var(--color-background) / <alpha-value>)",
+        surface: "rgb(var(--color-surface) / <alpha-value>)",
+        card: "rgb(var(--color-card) / <alpha-value>)",
         accent: "#FF2E2E",
         glow: "#8B0000",
-        background: "#F7F7F8",
         slate: "#6B7280",
         dark: "#5D0000",
-        surface: "#E5E7EB",
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
