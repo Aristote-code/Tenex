@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrambleText, TypewriterText } from '../components/ui';
-import { projectsData } from '../data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -178,7 +177,18 @@ const Protocol = () => {
 };
 
 const ProjectsPreview = () => {
-    const projects = projectsData.slice(0, 3);
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:1337/api/projects')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.data) {
+                    setProjects(data.data.slice(0, 3));
+                }
+            })
+            .catch(err => console.error("Failed to fetch projects:", err));
+    }, []);
 
     return (
         <section id="work" className="py-32 px-6 md:px-12 bg-primary">

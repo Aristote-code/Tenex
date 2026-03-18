@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "heroImage": {
+      "type": "string"
+    },
+    "overview": {
+      "type": "text",
+      "required": true
+    },
+    "challenge": {
+      "type": "text"
+    },
+    "solution": {
+      "type": "text"
+    },
+    "techStack": {
+      "type": "json"
+    },
+    "role": {
+      "type": "string"
+    },
+    "timeline": {
+      "type": "string"
+    }
+  }
+}

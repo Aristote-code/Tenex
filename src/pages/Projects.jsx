@@ -1,26 +1,44 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrambleText, TypewriterText } from '../components/ui';
-import { projectsData } from '../data/projects';
 
 const Projects = () => {
     const containerRef = useRef(null);
+    const [projectsData, setProjectsData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const ctx = gsap.context(() => {
-            gsap.from('.project-card', {
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: 'power3.out',
+        fetch('http://localhost:1337/api/projects')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.data) {
+                    setProjectsData(data.data);
+                }
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Failed to fetch projects:", err);
+                setLoading(false);
             });
-        }, containerRef);
-        return () => ctx.revert();
     }, []);
+
+    useEffect(() => {
+        if (!loading && projectsData.length > 0) {
+            const ctx = gsap.context(() => {
+                gsap.from('.project-card', {
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: 'power3.out',
+                });
+            }, containerRef);
+            return () => ctx.revert();
+        }
+    }, [loading, projectsData]);
 
     return (
         <div ref={containerRef} className="pt-40 pb-32 px-6 md:px-12 min-h-screen">

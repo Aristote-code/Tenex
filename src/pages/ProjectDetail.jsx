@@ -1,16 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { ScrambleText, TypewriterText } from '../components/ui';
-import { projectsData } from '../data/projects';
 
 const ProjectDetail = () => {
     const { slug } = useParams();
-    const project = projectsData.find(p => p.slug === slug);
+    const [project, setProject] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        fetch(`http://localhost:1337/api/projects?filters[slug][$eq]=${slug}&populate=*`)
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.data && data.data.length > 0) {
+                    setProject(data.data[0]);
+                }
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Failed to fetch project:", err);
+                setLoading(false);
+            });
     }, [slug]);
+
+    if (loading) {
+        return <div className="pt-32 pb-32 min-h-screen flex items-center justify-center font-data text-accent tracking-widest text-sm uppercase">Loading System Core...</div>;
+    }
 
     if (!project) {
         return <Navigate to="/work" replace />;

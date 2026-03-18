@@ -1,8 +1,9 @@
-export const projectsData = [
+import type { Core } from '@strapi/strapi';
+
+const originalProjects = [
     {
-        id: 1,
-        slug: 'nexus',
         title: 'Nexus',
+        slug: 'nexus',
         type: 'Fintech Platform',
         heroImage: '/images/project_1_1772633258112.png',
         overview: 'A next-generation trading platform prioritizing sub-millisecond execution and real-time analytics.',
@@ -13,9 +14,8 @@ export const projectsData = [
         timeline: '12 Weeks'
     },
     {
-        id: 2,
-        slug: 'aura',
         title: 'Aura',
+        slug: 'aura',
         type: 'AI Infrastructure',
         heroImage: '/images/project_2_1772633274878.png',
         overview: 'Distributed machine learning pipeline dashboard for managing clustered compute nodes.',
@@ -26,9 +26,8 @@ export const projectsData = [
         timeline: '8 Weeks'
     },
     {
-        id: 3,
-        slug: 'onyx',
         title: 'Onyx',
+        slug: 'onyx',
         type: 'Enterprise System',
         heroImage: '/images/project_3_1772633294372.png',
         overview: 'Secure, zero-trust enterprise resource planning system for aerospace logistics.',
@@ -39,3 +38,46 @@ export const projectsData = [
         timeline: '16 Weeks'
     }
 ];
+
+export default {
+  register(/* { strapi }: { strapi: Core.Strapi } */) {},
+
+  async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    try {
+      // 1. Populate data
+      const existingProjects = await strapi.db.query('api::project.project').findMany();
+      if (existingProjects.length === 0) {
+        console.log('Seeding initial projects...');
+        for (const p of originalProjects) {
+          await strapi.db.query('api::project.project').create({
+            data: {
+              ...p,
+              publishedAt: new Date(),
+            }
+          });
+        }
+        console.log('Projects seeded successfully.');
+      }
+
+      // 2. Allow public access to 'find' and 'findOne'
+      const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({ where: { type: 'public' } });
+      if (publicRole) {
+        const actions = ['api::project.project.find', 'api::project.project.findOne'];
+        for (const action of actions) {
+          const existing = await strapi.db.query('plugin::users-permissions.permission').findOne({ where: { action, role: publicRole.id } });
+          if (!existing) {
+            await strapi.db.query('plugin::users-permissions.permission').create({
+              data: {
+                action,
+                role: publicRole.id,
+              }
+            });
+          }
+        }
+        console.log('Public permissions updated successfully.');
+      }
+    } catch (err) {
+      console.error('Error in bootstrap:', err);
+    }
+  },
+};
