@@ -7,21 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#0D0D12",
-        accent: "#E8501A",
-        glow: "#FF6B35",
-        background: "#FAF8F5",
-        slate: "#2A2A35",
-        dark: "#0a0a0d",
-        surface: "#1A1A1F",
+        primary: "#1C1C1E",
+        accent: "#FF2E2E",
+        glow: "#8B0000",
+        background: "#F7F7F8",
+        slate: "#6B7280",
+        dark: "#5D0000",
+        surface: "#E5E7EB",
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        drama: ['Playfair Display', 'serif'],
-        data: ['JetBrains Mono', 'monospace'],
+        display: ['Satoshi', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       }
     },
   },
   plugins: [],
 }
-

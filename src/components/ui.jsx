@@ -58,5 +58,5 @@ export const TypewriterText = ({ text, className = "" }) => {
         }
     }, [text]);
 
-    return <span ref={textRef} className={`font-data text-accent text-sm tracking-widest uppercase ${className}`}></span>;
+    return <span ref={textRef} className={`font-mono text-accent text-sm tracking-widest uppercase ${className}`}></span>;
 };
